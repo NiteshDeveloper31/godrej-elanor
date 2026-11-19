@@ -31,6 +31,16 @@ A bespoke luxury real-estate experience designed for **Godrej Elanor Mahalunge, 
 
 ---
 
+## 📞 Verified Client Credentials & Lead Routing
+
+- **Contact Phone / Calling:** `+91 84593 96466`
+- **WhatsApp Concierge:** `https://wa.me/918459396466`
+- **Official Lead Email:** `enquiryinfinitee@gmail.com`
+- **Project MahaRERA:** `PR1260002602617`
+- **Agent MahaRERA:** `A52100040088`
+
+---
+
 ## 📱 Responsiveness Across All Breakpoints
 
 - Handcrafted and tested across **320px, 375px, 390px, 430px, 768px, 1024px, 1280px, 1440px, and 1920px**.

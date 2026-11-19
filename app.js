@@ -335,6 +335,8 @@ function initForms() {
         phone: cleanPhone,
         configuration: config,
         visitDate,
+        targetEmail: 'enquiryinfinitee@gmail.com',
+        targetPhone: '+918459396466',
         timestamp: new Date().toISOString(),
         project: 'Godrej Elanor Mahalunge, Pune'
       };
@@ -345,6 +347,29 @@ function initForms() {
         localStorage.setItem('godrej_elanor_leads', JSON.stringify(stored));
       } catch (err) {
         console.warn('LocalStorage unavailable', err);
+      }
+
+      // Dispatch lead payload
+      try {
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            access_key: 'enquiryinfinitee',
+            to: 'enquiryinfinitee@gmail.com',
+            subject: `New Lead: Godrej Elanor Mahalunge - ${name}`,
+            from_name: 'Godrej Elanor Portal',
+            name: name,
+            phone: cleanPhone,
+            configuration: config,
+            visit_date: visitDate,
+            project: 'Godrej Elanor Mahalunge'
+          })
+        }).catch(() => {
+          // Silent catch for demo environments
+        });
+      } catch (e) {
+        // Fallback
       }
 
       setTimeout(() => {
@@ -442,7 +467,7 @@ PROJECT OVERVIEW:
 • Developer: Godrej Properties Ltd. (127+ Years of Trust)
 • Location: Mahalunge, Baner-Hinjawadi IT Corridor, Pune - 411045
 • MahaRERA Registration: PR1260002602617
-• Channel Partner RERA: A51900029955 (PropSolutions4U Pvt. Ltd.)
+• Channel Partner RERA: A52100040088
 • Land Parcel: 8.5 Acres (French-inspired architecture)
 • Open Green Spaces: Approx. 5 Acres
 • Structure: Basement + Ground + 3 Podiums + 35 Residential Floors
@@ -485,7 +510,8 @@ LOCATION & TRANSIT ADVANTAGES:
 • Pune Airport: 35 Mins
 
 SALES & SITE VISIT DESK:
-• Phone: +91 91755 51405
+• Phone / WhatsApp: +91 84593 96466
+• Email: enquiryinfinitee@gmail.com
 • Address: Godrej Elanor, Riverfront Road, Mahalunge, Pune - 411045
 ================================================================================
     `;

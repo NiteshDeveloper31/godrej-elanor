@@ -1,0 +1,862 @@
+# -*- coding: utf-8 -*-
+"""
+Generate 100% exact replica of Godrej Properties Godrej Elanor
+Matching media_1795095536336_5ec03fb4.png pixel-for-pixel.
+"""
+
+html_content = r'''<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Godrej Elanor Mahalunge, Pune - Premium 3 & 4 BHK Residences</title>
+  <meta name="description" content="Welcome to Godrej Elanor Mahalunge, Pune. French-inspired 3 & 4 BHK riverside residences starting at ₹1.89 Cr* Onwards by Godrej Properties.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ==========================================================================
+       1. TOP HEADER (Exact Godrej Properties Header)
+       ========================================================================== -->
+  <header class="godrej-site-header">
+    <div class="header-inner-container">
+      
+      <!-- Brand Logo Left -->
+      <a href="/" class="header-brand-link" aria-label="Godrej Properties Home">
+        <img src="assets/images/godrej_properties_logo.svg" alt="Godrej Properties" class="header-logo-gpl">
+      </a>
+
+      <!-- Header Right Action Group (Search, Hamburger Menu, Godrej Script) -->
+      <div class="header-right-group">
+        <!-- Search Button -->
+        <button type="button" class="hdr-icon-circle" aria-label="Search Projects" data-open-modal="enquiryModal" data-prefill="Search Projects">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+
+        <!-- Hamburger Menu Toggle Button -->
+        <button type="button" class="hdr-icon-circle" id="navToggleBtn" aria-label="Open Navigation Menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+
+        <!-- Godrej Cursive Script Logo -->
+        <a href="/" class="header-script-link" aria-label="Godrej Group">
+          <img src="assets/images/godrejsignature.svg" alt="Godrej" class="header-logo-script">
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       2. HERO BANNER & SUB-NAV (Exact Match to media_1795095536336_5ec03fb4.png)
+       ========================================================================== -->
+  <section class="godrej-hero-section" id="hero">
+    
+    <!-- Sub-Navigation Bar overlaid on top of Hero -->
+    <nav class="hero-subnav-bar" id="subNav">
+      <div class="subnav-inner-container">
+        <!-- Back Link -->
+        <a href="#overview" class="subnav-back-link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span>Back</span>
+        </a>
+
+        <!-- Section Navigation Links -->
+        <ul class="subnav-links-list">
+          <li><a href="#overview" class="active">Overview</a></li>
+          <li><a href="#location">Location</a></li>
+          <li><a href="#price">Price</a></li>
+          <li><a href="#amenities">Amenities</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Banner Background Media (Responsive Desktop & Mobile High-Res) -->
+    <picture class="hero-picture-bg">
+      <source media="(max-width: 768px)" srcset="assets/images/godrej-cdn/banner-mobile-720x1600.webp">
+      <img src="assets/images/godrej-cdn/banner-desktop-1920x900.webp" alt="Godrej Elanor Mahalunge, Pune" class="hero-bg-media">
+    </picture>
+
+    <!-- Subtle Top & Bottom Lighting Overlay (Leaves image crystal clear) -->
+    <div class="hero-lighting-overlay"></div>
+
+    <!-- Floating Property Details Card (Exact Match to Reference Box) -->
+    <div class="hero-floating-card-wrapper">
+      <div class="property-details-info">
+        <h1 class="hero-project-title">Godrej Elanor</h1>
+        <div class="hero-project-sub">Mahalunge, Pune</div>
+        <div class="hero-specs-row">
+          <span class="hero-spec-item"><b>INR</b> 1.89 Cr. onwards</span>
+          <span class="hero-spec-sep">|</span>
+          <span class="hero-spec-item"><b>Possession</b> September 2031</span>
+          <span class="hero-spec-sep">|</span>
+          <span class="hero-spec-item">3 &amp; 4 BHK</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom-Right Circular Action Button with Glowing Ring & Plus Icon -->
+    <div class="hero-action-circle-wrap">
+      <button type="button" class="hero-circle-plus-btn" data-open-modal="enquiryModal" data-prefill="Schedule a Visit" aria-label="Schedule a visit / Get project details">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0B2545" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+      </button>
+    </div>
+
+  </section>
+
+  <!-- ==========================================================================
+       3. BREADCRUMB STRIP & ACTION BUTTONS
+       ========================================================================== -->
+  <div class="breadcrumb-action-strip">
+    <div class="site-container">
+      
+      <!-- Breadcrumbs -->
+      <nav class="breadcrumb-trail" aria-label="Breadcrumbs">
+        <a href="/">Home</a>
+        <span class="bc-arrow">&gt;</span>
+        <a href="#overview">Residential Projects</a>
+        <span class="bc-arrow">&gt;</span>
+        <a href="#location">Pune</a>
+        <span class="bc-arrow">&gt;</span>
+        <span class="bc-active">Godrej Elanor</span>
+      </nav>
+
+      <!-- Action Buttons Side-by-Side -->
+      <div class="overview-action-pills-row">
+        <button type="button" class="btn-action-pill" data-open-modal="enquiryModal" data-prefill="Brochure Request">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          <span>Enquire Now</span>
+        </button>
+
+        <a href="tel:+918459396466" class="btn-action-pill">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          <span>Call Us</span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       4. OVERVIEW SECTION (Authentic Copy + 1740x810 Crystal Image + Specs)
+       ========================================================================== -->
+  <section class="godrej-page-section" id="overview">
+    <div class="site-container">
+      
+      <!-- Authentic Builder Text -->
+      <div class="overview-lead-text-box">
+        <p>
+          Welcome to Godrej Elanor, where French-inspired elegance meets the promise of a thoughtfully curated lifestyle. Set within the expansive 119+ hectare (approx. 295+Acres) Mahalunge Township in Pune, Godrej Elanor brings together the charm of refined living. With access to approximately 8 hectares (approx. 20 Acres) of public greens and a Retail Street within the township, every day brings opportunities to experience more, connect more and live better.
+        </p>
+      </div>
+
+      <!-- High-Res Overview Building Image (1740x810) -->
+      <div class="overview-feature-img-wrap">
+        <img src="assets/images/godrej-cdn/overview-image-1740x810.webp" alt="Godrej Elanor Riverfront Clubhouse &amp; Podium" loading="lazy">
+      </div>
+
+      <!-- Key Specifications 4 Pills Grid -->
+      <div class="overview-spec-pills-row">
+        <div class="spec-pill-box">
+          <div class="pill-number">8.5 Acres</div>
+          <div class="pill-label">Land Parcel</div>
+        </div>
+        <div class="spec-pill-box">
+          <div class="pill-number">B+G+3P+35</div>
+          <div class="pill-label">Tower Elevation</div>
+        </div>
+        <div class="spec-pill-box">
+          <div class="pill-number">1 Lakh Sq. Ft.</div>
+          <div class="pill-label">Riverfront Promenade</div>
+        </div>
+        <div class="spec-pill-box">
+          <div class="pill-number">30,000 Sq. Ft.</div>
+          <div class="pill-label">Twin Clubhouses</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       5. NEIGHBOURHOOD SECTION (Map & Commute Drive Times)
+       ========================================================================== -->
+  <section class="godrej-page-section bg-subtle" id="location">
+    <div class="site-container">
+      <h2 class="section-center-heading">Neighbourhood</h2>
+
+      <!-- Map Embed Box -->
+      <div class="location-map-wrapper">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15127.350868205423!2d73.7431326!3d18.5813735!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2bb04c1069df9%3A0xb304b5a3e147e62a!2sMahalunge%2C%20Pune%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+          width="100%"
+          height="380"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Godrej Elanor Mahalunge Pune Location Map">
+        </iframe>
+      </div>
+
+      <!-- Transit Commute Badges -->
+      <div class="transit-distances-grid">
+        <div class="transit-badge-card">
+          <span class="transit-hub-name">Hinjawadi IT Hub</span>
+          <span class="transit-time-pill">9 Mins</span>
+        </div>
+        <div class="transit-badge-card">
+          <span class="transit-hub-name">Mumbai-Bangalore Highway</span>
+          <span class="transit-time-pill">12 Mins</span>
+        </div>
+        <div class="transit-badge-card">
+          <span class="transit-hub-name">Balewadi Metro Station</span>
+          <span class="transit-time-pill">14 Mins</span>
+        </div>
+        <div class="transit-badge-card">
+          <span class="transit-hub-name">Ruby Hall Clinic Hinjawadi</span>
+          <span class="transit-time-pill">11 Mins</span>
+        </div>
+        <div class="transit-badge-card">
+          <span class="transit-hub-name">Mahindra International School</span>
+          <span class="transit-time-pill">14 Mins</span>
+        </div>
+        <div class="transit-badge-card">
+          <span class="transit-hub-name">Chandani Chowk</span>
+          <span class="transit-time-pill">18 Mins</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       6. PRICE SECTION (Exact Gold Header Card)
+       ========================================================================== -->
+  <section class="godrej-page-section" id="price">
+    <div class="site-container max-w-narrow">
+      <h2 class="section-center-heading">Price</h2>
+
+      <!-- Official Gold Header Table Card -->
+      <div class="godrej-price-table-card">
+        <div class="price-table-gold-header">
+          <span>Price</span>
+        </div>
+
+        <div class="price-table-row">
+          <div class="typology-name">3 BHK</div>
+          <div class="typology-figure">
+            <span class="rupee-char">₹</span> 1.89 Cr* onwards
+          </div>
+        </div>
+
+        <div class="price-table-row">
+          <div class="typology-name">4 BHK</div>
+          <div class="typology-figure avail-req-text">
+            Available On Request
+          </div>
+        </div>
+      </div>
+
+      <p class="price-disclaimer-note">
+        GST, AMC, IFMS &amp; other charges additional*
+      </p>
+
+      <div class="text-center" style="margin-top: 1.5rem;">
+        <button type="button" class="btn-godrej-gold" data-open-modal="enquiryModal" data-prefill="Price Sheet Request">
+          <span>Request Detailed Cost Sheet (PDF)</span>
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       7. EMI CALCULATOR SECTION
+       ========================================================================== -->
+  <section class="godrej-page-section bg-subtle" id="calculator">
+    <div class="site-container max-w-narrow">
+      <div class="emi-calc-card-box">
+        <h3 class="emi-card-title">Emi Calculator</h3>
+
+        <!-- Loan Amount -->
+        <div class="emi-form-group">
+          <label class="emi-field-lbl" for="calcLoanAmt">Loan Amount</label>
+          <div class="emi-input-currency-wrapper">
+            <input type="number" id="calcLoanAmt" class="emi-num-input" value="18900000" step="100000" min="100000">
+            <span class="emi-input-rupee">₹</span>
+          </div>
+        </div>
+
+        <!-- Advance Payment Slider -->
+        <div class="emi-form-group">
+          <div class="emi-slider-meta-row">
+            <span class="emi-field-lbl">Advance Payment</span>
+            <span class="emi-pill-badge" id="advPayVal">20%</span>
+          </div>
+          <input type="range" id="sliderAdvance" class="emi-range-track" min="10" max="80" value="20" step="5">
+          <div class="emi-subtext">Down Payment: <strong id="downPayAmt">₹ 37.80 Lacs</strong></div>
+        </div>
+
+        <!-- Duration Slider -->
+        <div class="emi-form-group">
+          <div class="emi-slider-meta-row">
+            <span class="emi-field-lbl">Duration</span>
+            <span class="emi-pill-badge" id="tenorYearsVal">20 Years</span>
+          </div>
+          <input type="range" id="sliderDuration" class="emi-range-track" min="5" max="30" value="20" step="1">
+          <div class="emi-subtext">Tenor: 240 Months</div>
+        </div>
+
+        <!-- Interest Rate Slider -->
+        <div class="emi-form-group">
+          <div class="emi-slider-meta-row">
+            <span class="emi-field-lbl">Interest Rate</span>
+            <span class="emi-pill-badge" id="ratePctVal">8.5%</span>
+          </div>
+          <input type="range" id="sliderRate" class="emi-range-track" min="6" max="15" value="8.5" step="0.1">
+          <div class="emi-subtext">Annual interest rate</div>
+        </div>
+
+        <!-- Live Monthly Result -->
+        <div class="emi-monthly-result-box">
+          <div class="emi-result-lbl">Estimated monthly EMI</div>
+          <div class="emi-result-amount" id="finalMonthlyEmi">₹ 1,31,040 / month</div>
+        </div>
+
+        <div style="margin-top: 1.5rem;">
+          <button type="button" class="btn-godrej-navy full-width" data-open-modal="enquiryModal" data-prefill="Home Loan Pre-Approval">
+            <span>Get Pre-Approved Bank Loan</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       8. GALLERY SECTION (Official Azure CDN Images + Lightbox)
+       ========================================================================== -->
+  <section class="godrej-page-section" id="gallery">
+    <div class="site-container">
+      <h2 class="section-center-heading">Gallery</h2>
+
+      <!-- 3 Preview Cards Matching Reference Screenshot -->
+      <div class="gallery-preview-cards-strip">
+        <div class="gallery-preview-card" data-lightbox-idx="0">
+          <img src="assets/images/godrej-cdn/gallery/official-gal-1.webp" alt="Godrej Elanor French Architecture" loading="lazy">
+        </div>
+        <div class="gallery-preview-card featured" data-lightbox-idx="1">
+          <img src="assets/images/godrej-cdn/gallery/official-gal-2.webp" alt="Godrej Elanor Grand Living Salon" loading="lazy">
+        </div>
+        <div class="gallery-preview-card" data-lightbox-idx="2">
+          <img src="assets/images/godrej-cdn/gallery/official-gal-3.webp" alt="Godrej Elanor Riverside Promenade" loading="lazy">
+        </div>
+      </div>
+
+      <div class="text-center" style="margin-top: 2rem;">
+        <button type="button" class="btn-view-gallery" id="openFullGalleryBtn">
+          <span>View Gallery (24 Photos)</span>
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       9. FLOOR PLANS SECTION
+       ========================================================================== -->
+  <section class="godrej-page-section bg-subtle" id="floor-plans">
+    <div class="site-container">
+      <h2 class="section-center-heading">Floor Plans</h2>
+
+      <!-- Plan Switcher Pills -->
+      <div class="fp-pills-switcher">
+        <button type="button" class="fp-pill-btn active" data-tab="tabMasterPlan">Master Layout</button>
+        <button type="button" class="fp-pill-btn" data-tab="tab3Bhk">3 BHK Premium</button>
+        <button type="button" class="fp-pill-btn" data-tab="tab4Bhk">4 BHK Duplex</button>
+      </div>
+
+      <!-- Tab Panes -->
+      <div class="fp-tab-panes-wrapper">
+        
+        <!-- Master Plan -->
+        <div class="fp-tab-pane active" id="tabMasterPlan">
+          <div class="fp-grid-card">
+            <div class="fp-blueprint-box">
+              <img src="assets/images/floor-plan/MasterPlan.webp" alt="Godrej Elanor 8.5 Acres Master Layout" loading="lazy">
+            </div>
+            <div class="fp-info-box">
+              <h3 class="fp-info-title">8.5 Acres Master Layout</h3>
+              <p class="fp-info-desc">
+                5 Residential Towers (B+G+3P+35) overlooking 1,00,000 sq. ft. riverfront promenade and approx. 5 acres of open landscaped sanctuary.
+              </p>
+              <button type="button" class="btn-godrej-gold" data-open-modal="enquiryModal" data-prefill="Master Plan PDF">
+                <span>Download Master Plan PDF</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3 BHK Plan -->
+        <div class="fp-tab-pane" id="tab3Bhk" style="display: none;">
+          <div class="fp-grid-card">
+            <div class="fp-blueprint-box">
+              <img src="assets/images/floor-plan/UnitPlan.webp" alt="Godrej Elanor 3 BHK Premium Plan" loading="lazy">
+            </div>
+            <div class="fp-info-box">
+              <h3 class="fp-info-title">3 BHK Premium Residences</h3>
+              <p class="fp-info-desc">
+                1,270 to 1,310 Sq. Ft. RERA Carpet Area with continuous French running balconies, expansive living salon, and private master bedroom deck.
+              </p>
+              <button type="button" class="btn-godrej-gold" data-open-modal="enquiryModal" data-prefill="3 BHK Floor Plan PDF">
+                <span>Download 3 BHK Plan PDF</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 BHK Duplex -->
+        <div class="fp-tab-pane" id="tab4Bhk" style="display: none;">
+          <div class="fp-grid-card">
+            <div class="fp-blueprint-box">
+              <img src="assets/images/floor-plan/UnitPlan.webp" alt="Godrej Elanor 4 BHK Duplex Penthouse Plan" loading="lazy">
+            </div>
+            <div class="fp-info-box">
+              <h3 class="fp-info-title">4 BHK Duplex Residences</h3>
+              <p class="fp-info-desc">
+                Exclusive penthouses crowning floors 32 to 35 with double-height salons, private rooftop sundecks, and unhindered 360-degree river vistas.
+              </p>
+              <button type="button" class="btn-godrej-gold" data-open-modal="enquiryModal" data-prefill="4 BHK Duplex VIP PDF">
+                <span>Download 4 BHK Plan PDF</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       10. AMENITIES SECTION (Official High-Res Assets)
+       ========================================================================== -->
+  <section class="godrej-page-section" id="amenities">
+    <div class="site-container">
+      <h2 class="section-center-heading">Amenities</h2>
+
+      <div class="amenities-simple-grid">
+        <div class="amenity-simple-card">
+          <div class="amenity-img-box">
+            <img src="assets/images/godrej-cdn/amenities/official-amenity-1.webp" alt="Riverfront Promenade" loading="lazy">
+          </div>
+          <div class="amenity-meta">
+            <h4>Riverfront Promenade</h4>
+            <p>1 Lakh sq. ft. of landscaped water-edge walkway.</p>
+          </div>
+        </div>
+
+        <div class="amenity-simple-card">
+          <div class="amenity-img-box">
+            <img src="assets/images/godrej-cdn/amenities/official-amenity-2.webp" alt="Twin Clubhouses" loading="lazy">
+          </div>
+          <div class="amenity-meta">
+            <h4>Twin Clubhouses (30k Sq. Ft.)</h4>
+            <p>Grand indoor recreation, spa, and library lounges.</p>
+          </div>
+        </div>
+
+        <div class="amenity-simple-card">
+          <div class="amenity-img-box">
+            <img src="assets/images/godrej-cdn/amenities/official-amenity-3.webp" alt="Infinity-Edge Pool" loading="lazy">
+          </div>
+          <div class="amenity-meta">
+            <h4>Infinity-Edge Pool</h4>
+            <p>Temperature-controlled pool with poolside sundeck.</p>
+          </div>
+        </div>
+
+        <div class="amenity-simple-card">
+          <div class="amenity-img-box">
+            <img src="assets/images/godrej-cdn/amenities/official-amenity-4.webp" alt="CrossFit &amp; Gymnasium" loading="lazy">
+          </div>
+          <div class="amenity-meta">
+            <h4>CrossFit &amp; Gymnasium</h4>
+            <p>Imported cardio, strength &amp; personal training zones.</p>
+          </div>
+        </div>
+
+        <div class="amenity-simple-card">
+          <div class="amenity-img-box">
+            <img src="assets/images/godrej-cdn/amenities/official-amenity-5.webp" alt="Championship Badminton Court" loading="lazy">
+          </div>
+          <div class="amenity-meta">
+            <h4>Badminton Court</h4>
+            <p>Championship-grade indoor wooden courts.</p>
+          </div>
+        </div>
+
+        <div class="amenity-simple-card">
+          <div class="amenity-img-box">
+            <img src="assets/images/godrej-cdn/amenities/official-amenity-6.webp" alt="Glass-Back Squash Court" loading="lazy">
+          </div>
+          <div class="amenity-meta">
+            <h4>Squash Court</h4>
+            <p>Air-conditioned glass-back sports arena.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       11. MAHARERA LEGAL & TOWNSHIP DISCLOSURE
+       ========================================================================== -->
+  <section class="godrej-page-section bg-subtle">
+    <div class="site-container max-w-narrow">
+      <div class="official-rera-disclosure-card">
+        
+        <div class="rera-qr-and-nums">
+          <img src="assets/images/qr-code/6aeaebed56bba-PR1260002602617.png" alt="MahaRERA QR Code" class="rera-qr-img">
+          <div class="rera-id-text">
+            <div>Project MahaRERA: <strong>PR1260002602617</strong></div>
+            <div>Agent MahaRERA: <strong>A52100040088</strong></div>
+          </div>
+        </div>
+
+        <div class="rera-official-paragraph">
+          The project Godrej Elanor is registered with MahaRERA Registration no. <strong>PR1260002602617</strong> available at <a href="https://maharera.mahaonline.gov.in/" target="_blank" rel="noopener">https://maharera.mahaonline.gov.in/</a>. Marketed by: Godrej Experience Galleria, Hinjewadi, Pune - 411057.<br><br>
+          Godrej Elanor is part of a Sanctioned Township of around 119+ Hectares (approx. 295+ Acres) at Village Mahalunge, Maan, Hinjewadi and Nande, Pune. The Developer, viz., Godrej Properties Limited, is owner and being part of the said Township, is developing 34,358 Sq. Mtrs. of the land in the said Township. The development by Godrej Properties Limited has access to about 8 Hectares (approx. 20 acres) of public greens, and Retail Street forming part of the common amenities in the Township, along with other developers. The sale of flat(s)/unit(s) is subject to terms of the application form and the agreement for sale. Recipients are advised to apprise themselves of the necessary and relevant information of the project prior to making any purchase decisions. The official website of Godrej Properties Limited is <a href="https://www.godrejproperties.com" target="_blank" rel="noopener">www.godrejproperties.com</a>. Please do not rely on the information provided on any other website.
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       12. GET IN TOUCH (Lead Capture Form)
+       ========================================================================== -->
+  <section class="godrej-page-section" id="contact">
+    <div class="site-container max-w-narrow">
+      <div class="get-in-touch-wrapper">
+        <h2 class="section-center-heading">Get In Touch</h2>
+        <p class="git-intro-sub">
+          If you would like to know more about a specific project or have general questions, fill out the form below and a representative will get in touch with you soon.
+        </p>
+
+        <form data-lead-form class="get-in-touch-form" id="mainContactForm">
+          <div class="git-field">
+            <input type="text" name="name" required placeholder="Name*">
+          </div>
+
+          <div class="git-phone-row">
+            <span class="git-country-code">+91</span>
+            <input type="tel" name="phone" required placeholder="Mobile Number*" maxlength="10">
+          </div>
+
+          <div class="git-field">
+            <input type="email" name="email" placeholder="Email Address">
+          </div>
+
+          <div class="git-field">
+            <select name="configuration">
+              <option value="3 BHK Premium">3 BHK Premium - INR 1.89 Cr* Onwards</option>
+              <option value="4 BHK Duplex">4 BHK Duplex - Price on Request</option>
+            </select>
+          </div>
+
+          <div class="git-checkbox-row">
+            <input type="checkbox" id="gitOptin" required checked>
+            <label for="gitOptin">
+              Yes, I would like to receive updates &amp; promotions from Godrej Properties Limited &amp; authorized channel partner.
+            </label>
+          </div>
+
+          <div class="text-center" style="margin-top: 1.5rem;">
+            <button type="submit" class="btn-git-submit">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       13. ABOUT GODREJ PROPERTIES & FOOTER
+       ========================================================================== -->
+  <footer class="godrej-site-footer">
+    <div class="site-container">
+      
+      <!-- About Godrej Properties -->
+      <div class="about-gpl-block">
+        <h4 class="about-gpl-title">About Godrej Properties</h4>
+        <p class="about-gpl-desc">
+          Established in <strong>1897</strong>, Godrej Properties is the first real estate company to have ISO certification. The company is currently developing projects in 12 cities across India covering over 14 million square meters. Godrej Properties is known for bringing innovation and excellence to the real estate industry.
+        </p>
+      </div>
+
+      <!-- Accordion Navigation List -->
+      <div class="footer-accordions-list">
+        
+        <div class="footer-acc-item">
+          <button type="button" class="footer-acc-trigger">
+            <span>Know Us</span>
+            <span class="acc-plus-icon">+</span>
+          </button>
+          <div class="footer-acc-content">
+            <div class="footer-acc-inner">
+              <a href="#overview">Overview &amp; Heritage</a>
+              <a href="#overview">Management &amp; Leadership</a>
+              <a href="#overview">Awards &amp; Recognition</a>
+              <a href="#overview">Sustainability Initiatives</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-acc-item">
+          <button type="button" class="footer-acc-trigger">
+            <span>Projects</span>
+            <span class="acc-plus-icon">+</span>
+          </button>
+          <div class="footer-acc-content">
+            <div class="footer-acc-inner">
+              <a href="#hero">Godrej Elanor Pune</a>
+              <a href="#overview">Godrej Riverhills Mahalunge</a>
+              <a href="#overview">Godrej Hillside Pune</a>
+              <a href="#overview">Godrej Meadows Pune</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-acc-item">
+          <button type="button" class="footer-acc-trigger">
+            <span>Media Center</span>
+            <span class="acc-plus-icon">+</span>
+          </button>
+          <div class="footer-acc-content">
+            <div class="footer-acc-inner">
+              <a href="#gallery">Press Releases</a>
+              <a href="#gallery">Media Coverage</a>
+              <a href="#gallery">Photo &amp; Video Gallery</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-acc-item">
+          <button type="button" class="footer-acc-trigger">
+            <span>Investor Section</span>
+            <span class="acc-plus-icon">+</span>
+          </button>
+          <div class="footer-acc-content">
+            <div class="footer-acc-inner">
+              <a href="#overview">Annual Reports</a>
+              <a href="#overview">Financial Results</a>
+              <a href="#overview">Shareholder Information</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-acc-item">
+          <button type="button" class="footer-acc-trigger">
+            <span>Contact Us</span>
+            <span class="acc-plus-icon">+</span>
+          </button>
+          <div class="footer-acc-content">
+            <div class="footer-acc-inner">
+              <a href="tel:+918459396466">Hotline: +91 84593 96466</a>
+              <a href="mailto:enquiryinfinitee@gmail.com">Email: enquiryinfinitee@gmail.com</a>
+              <a href="#contact">Site Office: Mahalunge, Pune - 411045</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Social Links Row -->
+      <div class="footer-social-strip">
+        <span class="follow-lbl">Follow us on</span>
+        <div class="social-icons-cluster">
+          <a href="https://www.facebook.com/godrejproperties/" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"></path></svg>
+          </a>
+          <a href="https://x.com/GodrejProp" target="_blank" rel="noopener" aria-label="X Twitter">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+          </a>
+          <a href="https://www.instagram.com/godrejpropertiesltd/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg>
+          </a>
+          <a href="https://www.youtube.com/godrejpropertiesin" target="_blank" rel="noopener" aria-label="YouTube">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Legal Copyright Bar -->
+      <div class="footer-legal-bar">
+        <div class="footer-gpl-brand">
+          <img src="assets/images/godrej_properties_logo.svg" alt="Godrej Properties" style="height: 22px; width: auto; filter: grayscale(1) brightness(0.2);">
+        </div>
+        <div class="footer-copy-text">
+          Copyright &copy; 2026 Godrej Properties. <a href="#">Disclaimer</a> | <a href="#">Privacy Policy</a> | <a href="#">Sitemap</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       14. FIXED MOBILE BOTTOM STICKY ACTION BAR
+       ========================================================================== -->
+  <div class="mobile-sticky-footer-bar">
+    <div class="sticky-footer-grid">
+      <a href="tel:+918459396466" class="btn-sticky-action btn-call">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+        <span>Call Now</span>
+      </a>
+
+      <a href="https://wa.me/918459396466?text=Hi%2C%20I%20am%20interested%20in%20Godrej%20Elanor%20Mahalunge%20Pune.%20Please%20share%20the%20price%20sheet%20and%20brochure." target="_blank" rel="noopener" class="btn-sticky-action btn-wa">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.075-1.115-.06-.275-.088-.633-.223-1.077-.417-1.879-.817-3.099-2.73-3.193-2.856-.095-.126-.764-1.016-.764-1.939s.478-1.378.647-1.554c.17-.176.37-.221.493-.221.124 0 .248.001.356.006.115.006.268-.044.42.321.155.372.528 1.294.574 1.389.047.095.078.206.015.331-.063.125-.095.203-.189.313-.095.11-.199.245-.285.33-.095.093-.195.195-.084.385.111.19.493.813 1.056 1.314.726.645 1.339.845 1.53.94.19.095.303.079.416-.048.114-.127.488-.567.618-.762.13-.195.26-.163.438-.098.178.065 1.127.531 1.32.628.194.098.324.146.371.228.047.082.047.476-.097.881z"></path></svg>
+        <span>WhatsApp</span>
+      </a>
+
+      <button type="button" class="btn-sticky-action btn-enquire" data-open-modal="enquiryModal" data-prefill="Instant Price Sheet">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+        <span>Price Sheet</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Floating WhatsApp Icon -->
+  <a href="https://wa.me/918459396466?text=Hi%2C%20I%20am%20interested%20in%20Godrej%20Elanor%20Mahalunge%20Pune.%20Please%20share%20the%20price%20sheet%20and%20brochure." target="_blank" rel="noopener" class="floating-whatsapp-pill" aria-label="Chat on WhatsApp with Godrej Representative">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="#FFFFFF"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.075-1.115-.06-.275-.088-.633-.223-1.077-.417-1.879-.817-3.099-2.73-3.193-2.856-.095-.126-.764-1.016-.764-1.939s.478-1.378.647-1.554c.17-.176.37-.221.493-.221.124 0 .248.001.356.006.115.006.268-.044.42.321.155.372.528 1.294.574 1.389.047.095.078.206.015.331-.063.125-.095.203-.189.313-.095.11-.199.245-.285.33-.095.093-.195.195-.084.385.111.19.493.813 1.056 1.314.726.645 1.339.845 1.53.94.19.095.303.079.416-.048.114-.127.488-.567.618-.762.13-.195.26-.163.438-.098.178.065 1.127.531 1.32.628.194.098.324.146.371.228.047.082.047.476-.097.881z"></path></svg>
+  </a>
+
+  <!-- Mobile Drawer Menu Overlay -->
+  <div class="mobile-drawer-overlay" id="mobileDrawer">
+    <div class="drawer-inner-box">
+      <div class="drawer-header">
+        <img src="assets/images/godrej_properties_logo.svg" alt="Godrej Properties" style="height: 24px;">
+        <button type="button" class="drawer-close-btn" id="drawerCloseBtn" aria-label="Close menu">&times;</button>
+      </div>
+      <div class="drawer-nav-list">
+        <a href="#overview" class="drawer-link">Overview</a>
+        <a href="#location" class="drawer-link">Location</a>
+        <a href="#price" class="drawer-link">Price</a>
+        <a href="#floor-plans" class="drawer-link">Floor Plans</a>
+        <a href="#amenities" class="drawer-link">Amenities</a>
+        <a href="#gallery" class="drawer-link">Gallery</a>
+        <a href="#contact" class="drawer-link">Get In Touch</a>
+      </div>
+      <div class="drawer-contact-footer">
+        <a href="tel:+918459396466" class="contact-pill-link">
+          <span>Call: +91 84593 96466</span>
+        </a>
+        <button type="button" class="btn-godrej-gold full-width" data-open-modal="enquiryModal" data-prefill="Brochure Request" style="margin-top: 1rem;">
+          Download Brochure
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Enquiry Modal Dialog -->
+  <div class="modal-overlay" id="enquiryModal">
+    <div class="modal-dialog-box">
+      <button type="button" class="modal-close-icon modal-close-btn" aria-label="Close">&times;</button>
+      <div class="modal-dialog-header">
+        <h3>Godrej Elanor Mahalunge</h3>
+        <p>Register your interest to receive official floor plans, price sheets &amp; book exclusive site visits.</p>
+      </div>
+      <form data-lead-form id="modalEnquiryForm">
+        <input type="hidden" name="enquiry_type" value="General Enquiry">
+        <div class="modal-input-field">
+          <label>Full Name*</label>
+          <input type="text" name="name" required placeholder="Enter full name">
+        </div>
+        <div class="modal-input-field">
+          <label>Mobile Number*</label>
+          <div class="modal-phone-group">
+            <span class="country-tag">+91</span>
+            <input type="tel" name="phone" required placeholder="10-digit mobile number" maxlength="10">
+          </div>
+        </div>
+        <div class="modal-input-field">
+          <label>Email Address</label>
+          <input type="email" name="email" placeholder="name@domain.com">
+        </div>
+        <div class="modal-input-field">
+          <label>Preferred Configuration</label>
+          <select name="configuration">
+            <option value="3 BHK Premium">3 BHK Premium (1,270 - 1,280 Sq. Ft.) - ₹ 1.89 Cr*</option>
+            <option value="4 BHK Duplex">4 BHK Duplex Penthouse - Available On Request</option>
+          </select>
+        </div>
+        <button type="submit" class="btn-godrej-gold full-width" style="margin-top: 1.25rem;">
+          Submit Priority Request
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Success Confirmation Modal -->
+  <div class="modal-overlay" id="successModal">
+    <div class="modal-dialog-box text-center">
+      <div class="success-check-badge">✓</div>
+      <h3 style="margin-bottom: 0.5rem;">Request Registered!</h3>
+      <p style="color: #64748B; font-size: 0.95rem; margin-bottom: 1.25rem;">
+        Thank you, <strong id="successLeadName" style="color: #071A30;">Customer</strong>. Our authorized Godrej relationship advisor will connect with you on <strong id="successLeadPhone">+91</strong> within 15 minutes.
+      </p>
+      <div style="background: #F8FAFC; border: 1px dashed #CBD5E1; padding: 0.75rem; border-radius: 4px; font-size: 0.85rem; color: #475569; margin-bottom: 1.5rem;">
+        Inquiry Ref: <strong id="successRefId" style="color: #071A30;">GE-84291</strong>
+      </div>
+      <a href="https://wa.me/918459396466?text=Hi%2C%20I%20have%20submitted%20my%20enquiry%20for%20Godrej%20Elanor.%20Please%20connect%20instantly." target="_blank" rel="noopener" class="btn-success-whatsapp" style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; background: #25D366; color: #FFFFFF; padding: 0.85rem 1.25rem; border-radius: 4px; font-weight: 600; text-decoration: none;">
+        <span>Chat Instantly on WhatsApp</span>
+      </a>
+      <button type="button" class="btn-plain modal-close-btn" style="margin-top: 1rem; color: #64748B; font-size: 0.85rem; background: none; border: none; cursor: pointer;">
+        Close Window
+      </button>
+    </div>
+  </div>
+
+  <!-- Full Gallery Lightbox Modal -->
+  <div class="lightbox-modal-wrap" id="lightboxModal">
+    <div class="lightbox-top-bar">
+      <div class="lightbox-caption" id="lightboxCaption">Godrej Elanor - Architecture Gallery</div>
+      <button type="button" class="lightbox-close-btn" id="lightboxCloseBtn" aria-label="Close Gallery">&times;</button>
+    </div>
+    <div class="lightbox-body">
+      <button type="button" class="lightbox-nav-btn lightbox-prev" aria-label="Previous Photo">&#10094;</button>
+      <div class="lightbox-img-holder">
+        <img src="assets/images/godrej-cdn/gallery/official-gal-1.webp" alt="Godrej Elanor Gallery" id="lightboxImg">
+      </div>
+      <button type="button" class="lightbox-nav-btn lightbox-next" aria-label="Next Photo">&#10095;</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
+'''
+
+with open('index.html', 'w', encoding='utf-8') as f:
+    f.write(html_content)
+
+print("Generated clean, pristine index.html matching official Godrej!")

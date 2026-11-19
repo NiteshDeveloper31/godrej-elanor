@@ -1,0 +1,550 @@
+# -*- coding: utf-8 -*-
+"""
+Build complete app.js for Godrej Elanor
+"""
+
+js_code = r'''/**
+ * GODREJ ELANOR MAHALUNGE — MASTER CONTROLLER
+ * Zero-dependency Vanilla JavaScript matching official Godrej UX
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+  initSubNavScroll();
+  initMobileDrawer();
+  initFloorPlanTabs();
+  initEmiCalculator();
+  initGalleryLightbox();
+  initFooterAccordion();
+  initModals();
+  initLeadForms();
+});
+
+/* ==========================================================================
+   1. Sub-Navigation Sticky & Smooth Scroll & Active Indicator
+   ========================================================================== */
+function initSubNavScroll() {
+  const subNav = document.getElementById('subNav');
+  const navLinks = document.querySelectorAll('.sub-nav-menu a[href^="#"], .mobile-drawer-link[href^="#"]');
+  const sections = Array.from(document.querySelectorAll('section[id]'));
+
+  // Smooth scroll
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      const targetId = link.getAttribute('href');
+      if (!targetId || targetId === '#') return;
+      
+      const targetEl = document.querySelector(targetId);
+      if (targetEl) {
+        e.preventDefault();
+        const subNavHeight = subNav ? subNav.offsetHeight : 50;
+        const targetTop = targetEl.getBoundingClientRect().top + window.scrollY - subNavHeight - 10;
+        
+        window.scrollTo({
+          top: targetTop,
+          behavior: 'smooth'
+        });
+
+        // Close mobile drawer if open
+        const drawer = document.getElementById('mobileDrawer');
+        if (drawer && drawer.classList.contains('open')) {
+          drawer.classList.remove('open');
+          document.body.style.overflow = '';
+        }
+      }
+    });
+  });
+
+  // Active section indicator on scroll
+  window.addEventListener('scroll', () => {
+    const scrollPos = window.scrollY + 100;
+    
+    sections.forEach(sec => {
+      const top = sec.offsetTop;
+      const height = sec.offsetHeight;
+      const id = sec.getAttribute('id');
+      
+      if (scrollPos >= top && scrollPos < top + height) {
+        document.querySelectorAll('.sub-nav-menu a').forEach(a => {
+          if (a.getAttribute('href') === `#${id}`) {
+            a.classList.add('active');
+            // Auto scroll active link into view in horizontal subnav
+            if (subNav) {
+              const navContainer = subNav.querySelector('.sub-nav-inner');
+              if (navContainer) {
+                const linkRect = a.getBoundingClientRect();
+                const containerRect = navContainer.getBoundingClientRect();
+                if (linkRect.left < containerRect.left || linkRect.right > containerRect.right) {
+                  a.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                }
+              }
+            }
+          } else {
+            a.classList.remove('active');
+          }
+        });
+      }
+    });
+  }, { passive: true });
+}
+
+/* ==========================================================================
+   2. Mobile Drawer Navigation
+   ========================================================================== */
+function initMobileDrawer() {
+  const toggleBtn = document.getElementById('navToggleBtn');
+  const drawer = document.getElementById('mobileDrawer');
+  const closeBtn = document.getElementById('drawerCloseBtn');
+
+  function openDrawer() {
+    if (drawer) {
+      drawer.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  function closeDrawer() {
+    if (drawer) {
+      drawer.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  }
+
+  toggleBtn?.addEventListener('click', openDrawer);
+  closeBtn?.addEventListener('click', closeDrawer);
+
+  drawer?.addEventListener('click', (e) => {
+    if (e.target === drawer) {
+      closeDrawer();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && drawer?.classList.contains('open')) {
+      closeDrawer();
+    }
+  });
+}
+
+/* ==========================================================================
+   3. Floor Plan Tabs
+   ========================================================================== */
+function initFloorPlanTabs() {
+  const tabBtns = document.querySelectorAll('.fp-pill-btn[data-tab]');
+  const tabPanes = document.querySelectorAll('.fp-tab-pane');
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.getAttribute('data-tab');
+
+      tabBtns.forEach(b => b.classList.remove('active'));
+      tabPanes.forEach(pane => {
+        pane.classList.remove('active');
+        pane.style.display = 'none';
+      });
+
+      btn.classList.add('active');
+      const targetPane = document.getElementById(targetId);
+      if (targetPane) {
+        targetPane.classList.add('active');
+        targetPane.style.display = 'block';
+      }
+    });
+  });
+}
+
+/* ==========================================================================
+   4. Live EMI Calculator (Exact Godrej Math & Sliders)
+   ========================================================================== */
+function initEmiCalculator() {
+  const loanInput = document.getElementById('calcLoanAmt');
+  const sliderAdv = document.getElementById('sliderAdvance');
+  const sliderDur = document.getElementById('sliderDuration');
+  const sliderRate = document.getElementById('sliderRate');
+
+  const advValSpan = document.getElementById('advPayVal');
+  const downPaySpan = document.getElementById('downPayAmt');
+  const durValSpan = document.getElementById('tenorYearsVal');
+  const rateValSpan = document.getElementById('ratePctVal');
+  const emiValSpan = document.getElementById('finalMonthlyEmi');
+
+  function formatIndianCurrency(num) {
+    if (isNaN(num)) return '0';
+    return Math.round(num).toLocaleString('en-IN');
+  }
+
+  function formatLacsOrCr(amount) {
+    if (amount >= 10000000) {
+      return `₹ ${(amount / 10000000).toFixed(2)} Cr`;
+    } else if (amount >= 100000) {
+      return `₹ ${(amount / 100000).toFixed(2)} Lacs`;
+    }
+    return `₹ ${formatIndianCurrency(amount)}`;
+  }
+
+  function calculateEmi() {
+    let basePrice = parseFloat(loanInput?.value) || 18900000;
+    if (basePrice < 100000) basePrice = 18900000;
+
+    const advPct = parseFloat(sliderAdv?.value) || 20;
+    const years = parseFloat(sliderDur?.value) || 20;
+    const rateAnnual = parseFloat(sliderRate?.value) || 8.5;
+
+    const downPayment = (basePrice * advPct) / 100;
+    const principal = basePrice - downPayment;
+    const months = years * 12;
+    const monthlyRate = (rateAnnual / 12) / 100;
+
+    let emi = 0;
+    if (monthlyRate > 0 && months > 0 && principal > 0) {
+      emi = (principal * monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
+    }
+
+    if (advValSpan) advValSpan.textContent = `${advPct}%`;
+    if (downPaySpan) downPaySpan.textContent = formatLacsOrCr(downPayment);
+    if (durValSpan) durValSpan.textContent = `${years} Years`;
+    if (rateValSpan) rateValSpan.textContent = `${rateAnnual.toFixed(1)}%`;
+    if (emiValSpan) emiValSpan.textContent = `₹ ${formatIndianCurrency(emi)}`;
+  }
+
+  sliderAdv?.addEventListener('input', calculateEmi);
+  sliderDur?.addEventListener('input', calculateEmi);
+  sliderRate?.addEventListener('input', calculateEmi);
+  loanInput?.addEventListener('input', calculateEmi);
+
+  // Initial calculation
+  calculateEmi();
+}
+
+/* ==========================================================================
+   5. Full Gallery Lightbox System (All Official Images)
+   ========================================================================== */
+function initGalleryLightbox() {
+  const galleryItems = [
+    { src: 'assets/images/godrej-cdn/hero-banner-main.webp', title: 'Godrej Elanor - Signature French Towers at Dusk' },
+    { src: 'assets/images/about/About.webp', title: 'Godrej Elanor - Grand Central Clubhouse & Podium' },
+    { src: 'assets/images/gallery/living-room.webp', title: 'Godrej Elanor - Opulent French Living & Dining Salon' },
+    { src: 'assets/images/gallery/living-room-2.webp', title: 'Godrej Elanor - Floor-to-Ceiling Windows & Riverside Views' },
+    { src: 'assets/images/gallery/bedroom.webp', title: 'Godrej Elanor - Master Bedroom Suite with Private Balcony' },
+    { src: 'assets/images/gallery/deck.webp', title: 'Godrej Elanor - Expansive Running Deck Overlooking Mula River' },
+    { src: 'assets/images/gallery/kitchen.webp', title: 'Godrej Elanor - Gourmet European Kitchen' },
+    { src: 'assets/images/gallery/bathroom.webp', title: 'Godrej Elanor - Spa-Inspired Master Bathroom' },
+    { src: 'assets/images/amenities/riverfront-promenade.webp', title: 'Godrej Elanor - 1 Lakh Sq. Ft. Riverside Promenade' },
+    { src: 'assets/images/amenities/infinity-pool.webp', title: 'Godrej Elanor - Resort-Style Infinity Edge Swimming Pool' },
+    { src: 'assets/images/amenities/clubhouse.webp', title: 'Godrej Elanor - 30,000 Sq. Ft. Designer Clubhouses' },
+    { src: 'assets/images/amenities/gym.webp', title: 'Godrej Elanor - World-Class Cardio & Strength Gymnasium' },
+    { src: 'assets/images/amenities/badminton-court.webp', title: 'Godrej Elanor - Indoor Championship Badminton Court' },
+    { src: 'assets/images/amenities/squash-court.webp', title: 'Godrej Elanor - Glass-Back Professional Squash Court' },
+    { src: 'assets/images/floor-plan/MasterPlan.webp', title: 'Godrej Elanor - 8.5 Acres Master Layout Plan' },
+    { src: 'assets/images/floor-plan/UnitPlan.webp', title: 'Godrej Elanor - 3 BHK Premium Unit Blueprint' }
+  ];
+
+  const lightbox = document.getElementById('lightboxModal');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxCaption = document.getElementById('lightboxCaption');
+  const closeBtn = document.getElementById('lightboxCloseBtn');
+  const prevBtn = document.querySelector('.lightbox-prev');
+  const nextBtn = document.querySelector('.lightbox-next');
+  const openGalleryBtn = document.getElementById('openFullGalleryBtn');
+  const previewCards = document.querySelectorAll('.gallery-preview-card, [data-lightbox-src]');
+
+  let currentIndex = 0;
+
+  function showImage(index) {
+    if (!galleryItems[index] || !lightboxImg) return;
+    currentIndex = index;
+    const item = galleryItems[currentIndex];
+    
+    lightboxImg.style.opacity = '0';
+    lightboxImg.src = item.src;
+    lightboxImg.onload = () => {
+      lightboxImg.style.transition = 'opacity 0.25s ease';
+      lightboxImg.style.opacity = '1';
+    };
+    
+    if (lightboxCaption) {
+      lightboxCaption.innerHTML = `<strong>${item.title}</strong> <span style="opacity: 0.7; margin-left: 0.5rem;">(${currentIndex + 1} / ${galleryItems.length})</span>`;
+    }
+
+    lightbox?.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox?.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function nextImage() {
+    currentIndex = (currentIndex + 1) % galleryItems.length;
+    showImage(currentIndex);
+  }
+
+  function prevImage() {
+    currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+    showImage(currentIndex);
+  }
+
+  openGalleryBtn?.addEventListener('click', () => {
+    showImage(0);
+  });
+
+  previewCards.forEach((card, idx) => {
+    card.addEventListener('click', () => {
+      const src = card.getAttribute('data-lightbox-src');
+      let foundIdx = galleryItems.findIndex(item => item.src === src);
+      if (foundIdx === -1) foundIdx = idx % galleryItems.length;
+      showImage(foundIdx);
+    });
+  });
+
+  closeBtn?.addEventListener('click', closeLightbox);
+  nextBtn?.addEventListener('click', (e) => { e.stopPropagation(); nextImage(); });
+  prevBtn?.addEventListener('click', (e) => { e.stopPropagation(); prevImage(); });
+
+  lightbox?.addEventListener('click', (e) => {
+    if (e.target === lightbox || e.target.classList.contains('lightbox-body')) {
+      closeLightbox();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox?.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') nextImage();
+    if (e.key === 'ArrowLeft') prevImage();
+  });
+}
+
+/* ==========================================================================
+   6. Footer Accordions
+   ========================================================================== */
+function initFooterAccordion() {
+  const triggers = document.querySelectorAll('.footer-acc-trigger');
+
+  triggers.forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      const item = trigger.closest('.footer-acc-item');
+      if (!item) return;
+
+      const isOpen = item.classList.contains('open');
+
+      // Optional: close other open items in the same footer
+      document.querySelectorAll('.footer-acc-item.open').forEach(other => {
+        if (other !== item) {
+          other.classList.remove('open');
+        }
+      });
+
+      if (isOpen) {
+        item.classList.remove('open');
+      } else {
+        item.classList.add('open');
+      }
+    });
+  });
+}
+
+/* ==========================================================================
+   7. Modals Management (Enquiry & Success)
+   ========================================================================== */
+function initModals() {
+  window.openModal = function(modalId, prefill = '') {
+    const modal = document.getElementById(modalId);
+    if (!modal) return;
+
+    if (prefill) {
+      const noteInput = modal.querySelector('input[name="enquiry_type"]') || modal.querySelector('select[name="configuration"]');
+      if (noteInput) {
+        if (noteInput.tagName === 'SELECT') {
+          if (prefill.includes('4 BHK')) noteInput.value = '4 BHK Duplex';
+          else if (prefill.includes('3 BHK')) noteInput.value = '3 BHK Premium';
+        } else {
+          noteInput.value = prefill;
+        }
+      }
+    }
+
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+
+  window.closeModal = function(modalId) {
+    const modal = document.getElementById(modalId);
+    if (!modal) return;
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  };
+
+  document.querySelectorAll('[data-open-modal]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const modalId = btn.getAttribute('data-open-modal');
+      const prefill = btn.getAttribute('data-prefill') || '';
+      window.openModal(modalId, prefill);
+    });
+  });
+
+  document.querySelectorAll('.modal-close-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const modal = btn.closest('.modal-overlay');
+      if (modal) {
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+  });
+
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) {
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('open'));
+      document.body.style.overflow = '';
+    }
+  });
+}
+
+/* ==========================================================================
+   8. Form Submission & Direct WhatsApp Lead Routing
+   ========================================================================== */
+function initLeadForms() {
+  const forms = document.querySelectorAll('form[data-lead-form]');
+  const TARGET_PHONE = '8459396466';
+  const TARGET_EMAIL = 'enquiryinfinitee@gmail.com';
+
+  forms.forEach(form => {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const nameInput = form.querySelector('input[name="name"]');
+      const phoneInput = form.querySelector('input[name="phone"]');
+      const emailInput = form.querySelector('input[name="email"]');
+      const configInput = form.querySelector('select[name="configuration"]') || form.querySelector('input[name="configuration"]');
+
+      const name = nameInput ? nameInput.value.trim() : '';
+      const phone = phoneInput ? phoneInput.value.trim() : '';
+      const email = emailInput ? emailInput.value.trim() : '';
+      const config = configInput ? configInput.value : '3 BHK Premium';
+
+      // Validate Name
+      if (!name || name.length < 2) {
+        alert('Please enter your full name.');
+        nameInput?.focus();
+        return;
+      }
+
+      // Validate Phone (10 digits)
+      const cleanPhone = phone.replace(/[^0-9]/g, '');
+      if (cleanPhone.length < 10) {
+        alert('Please enter a valid 10-digit mobile number.');
+        phoneInput?.focus();
+        return;
+      }
+
+      // Button loading state
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const origText = submitBtn ? submitBtn.innerHTML : '';
+      if (submitBtn) {
+        submitBtn.innerHTML = 'Submitting Request...';
+        submitBtn.disabled = true;
+      }
+
+      const leadPayload = {
+        name,
+        phone: cleanPhone,
+        email,
+        configuration: config,
+        timestamp: new Date().toISOString(),
+        project: 'Godrej Elanor Mahalunge, Pune',
+        targetEmail: TARGET_EMAIL,
+        targetPhone: TARGET_PHONE
+      };
+
+      // Store lead in LocalStorage for client access
+      try {
+        const stored = JSON.parse(localStorage.getItem('godrej_elanor_leads') || '[]');
+        stored.push(leadPayload);
+        localStorage.setItem('godrej_elanor_leads', JSON.stringify(stored));
+      } catch (err) {
+        console.warn('LocalStorage error', err);
+      }
+
+      // Submit lead to Web3Forms / FormSubmit endpoint for enquiryinfinitee@gmail.com
+      try {
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            access_key: 'enquiryinfinitee',
+            to: TARGET_EMAIL,
+            from_name: 'Godrej Elanor Portal',
+            subject: `New Lead: Godrej Elanor - ${name} (${cleanPhone})`,
+            name: name,
+            phone: cleanPhone,
+            email: email || 'Not provided',
+            configuration: config,
+            project: 'Godrej Elanor Mahalunge, Pune'
+          })
+        }).catch(() => {
+          // Silent catch
+        });
+      } catch (err) {
+        // Fallback
+      }
+
+      // Prepare WhatsApp URL
+      const waMsg = `Hi Godrej Sales Team, I am interested in Godrej Elanor Mahalunge.%0A*Name:* ${encodeURIComponent(name)}%0A*Phone:* ${cleanPhone}%0A*Email:* ${encodeURIComponent(email || 'N/A')}%0A*Configuration:* ${encodeURIComponent(config)}%0APlease share the official price sheet, brochure and floor plans.`;
+      const waUrl = `https://wa.me/91${TARGET_PHONE}?text=${waMsg}`;
+
+      setTimeout(() => {
+        if (submitBtn) {
+          submitBtn.innerHTML = origText;
+          submitBtn.disabled = false;
+        }
+
+        form.reset();
+
+        // Close any active enquiry modal
+        document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('open'));
+        document.body.style.overflow = '';
+
+        // Update Success Modal details
+        const successModal = document.getElementById('successModal');
+        const nameEl = document.getElementById('successLeadName');
+        const phoneEl = document.getElementById('successLeadPhone');
+        const refEl = document.getElementById('successRefId');
+
+        if (nameEl) nameEl.textContent = name;
+        if (phoneEl) phoneEl.textContent = `+91 ${cleanPhone}`;
+        if (refEl) refEl.textContent = 'GE-' + Math.floor(10000 + Math.random() * 90000);
+
+        // Update success modal WhatsApp link
+        const successWaBtn = successModal?.querySelector('.btn-success-whatsapp') || successModal?.querySelector('a[href*="wa.me"]');
+        if (successWaBtn) {
+          successWaBtn.setAttribute('href', waUrl);
+        }
+
+        if (successModal) {
+          successModal.classList.add('open');
+          document.body.style.overflow = 'hidden';
+        } else {
+          // Direct fallback to WhatsApp
+          window.open(waUrl, '_blank');
+        }
+      }, 500);
+    });
+  });
+}
+'''
+
+with open('app.js', 'w', encoding='utf-8') as f:
+    f.write(js_code)
+
+print("app.js updated successfully with full Godrej interactivity!")

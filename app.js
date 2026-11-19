@@ -1,122 +1,267 @@
 /**
- * GODREJ ELANOR MAHALUNGE — EDITORIAL ARCHITECTURE CONTROLLER
- * Zero-dependency Vanilla JavaScript
+ * GODREJ ELANOR MAHALUNGE — MASTER CONTROLLER
+ * Zero-dependency Vanilla JavaScript matching official Godrej UX
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  initHeader();
+  initSubNavScroll();
   initMobileDrawer();
   initFloorPlanTabs();
-  initGalleryLightbox();
-  initFaqAccordion();
   initEmiCalculator();
+  initGalleryLightbox();
+  initFooterAccordion();
   initModals();
-  initForms();
-  initSmoothScroll();
+  initLeadForms();
 });
 
 /* ==========================================================================
-   Header Transformation on Scroll
+   1. Sub-Navigation Sticky & Smooth Scroll & Active Indicator
    ========================================================================== */
-function initHeader() {
-  const header = document.querySelector('.site-header');
+function initSubNavScroll() {
+  const subNav = document.getElementById('subNav');
+  const navLinks = document.querySelectorAll('.subnav-links-list a[href^="#"], .drawer-link[href^="#"], .breadcrumb-trail a[href^="#"]');
+  const sections = Array.from(document.querySelectorAll('section[id]'));
+  const topLinks = document.querySelectorAll('.header-brand-link, .header-script-link, a[href="#hero"]');
+
+  // Smooth scroll to top when clicking logos or Home
+  topLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+      // Close mobile drawer if open
+      const drawer = document.getElementById('mobileDrawer');
+      if (drawer && drawer.classList.contains('open')) {
+        drawer.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+  });
+
+  // Smooth scroll for in-page anchors
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      const targetId = link.getAttribute('href');
+      if (!targetId || targetId === '#') return;
+      if (targetId === '#hero') {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+      
+      const targetEl = document.querySelector(targetId);
+      if (targetEl) {
+        e.preventDefault();
+        const headerHeight = 114;
+        const targetTop = targetEl.getBoundingClientRect().top + window.scrollY - headerHeight + 5;
+        
+        window.scrollTo({
+          top: targetTop,
+          behavior: 'smooth'
+        });
+
+        // Close mobile drawer if open
+        const drawer = document.getElementById('mobileDrawer');
+        if (drawer && drawer.classList.contains('open')) {
+          drawer.classList.remove('open');
+          document.body.style.overflow = '';
+        }
+      }
+    });
+  });
+
+  // Active section indicator on scroll
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 30) {
-      header?.classList.add('scrolled');
-    } else {
-      header?.classList.remove('scrolled');
-    }
+    const scrollPos = window.scrollY + 140;
+    
+    sections.forEach(sec => {
+      const top = sec.offsetTop;
+      const height = sec.offsetHeight;
+      const id = sec.getAttribute('id');
+      
+      if (scrollPos >= top && scrollPos < top + height) {
+        document.querySelectorAll('.subnav-links-list a').forEach(a => {
+          if (a.getAttribute('href') === `#${id}`) {
+            a.classList.add('active');
+          } else {
+            a.classList.remove('active');
+          }
+        });
+      }
+    });
   }, { passive: true });
 }
 
 /* ==========================================================================
-   Mobile Navigation Drawer
+   2. Mobile Drawer Navigation
    ========================================================================== */
 function initMobileDrawer() {
-  const toggleBtn = document.querySelector('.mobile-nav-toggle');
+  const toggleBtn = document.getElementById('navToggleBtn');
   const drawer = document.getElementById('mobileDrawer');
-  const closeBtn = document.getElementById('mobileCloseBtn');
-  const navLinks = drawer?.querySelectorAll('a');
+  const closeBtn = document.getElementById('drawerCloseBtn');
 
   function openDrawer() {
-    drawer?.classList.add('open');
-    document.body.style.overflow = 'hidden';
+    if (drawer) {
+      drawer.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
   }
 
   function closeDrawer() {
-    drawer?.classList.remove('open');
-    document.body.style.overflow = '';
+    if (drawer) {
+      drawer.classList.remove('open');
+      document.body.style.overflow = '';
+    }
   }
 
   toggleBtn?.addEventListener('click', openDrawer);
   closeBtn?.addEventListener('click', closeDrawer);
 
   drawer?.addEventListener('click', (e) => {
-    if (e.target === drawer) closeDrawer();
+    if (e.target === drawer) {
+      closeDrawer();
+    }
   });
 
-  navLinks?.forEach(link => {
-    link.addEventListener('click', closeDrawer);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && drawer?.classList.contains('open')) {
+      closeDrawer();
+    }
   });
 }
 
 /* ==========================================================================
-   Blueprint & Floor Plan Tabs
+   3. Floor Plan Tabs
    ========================================================================== */
 function initFloorPlanTabs() {
-  const tabBtns = document.querySelectorAll('.plan-pill-btn[data-tab]');
-  const tabPanes = document.querySelectorAll('.plan-tab-pane');
+  const tabBtns = document.querySelectorAll('.fp-pill-btn[data-tab]');
+  const tabPanes = document.querySelectorAll('.fp-tab-pane');
 
   tabBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const targetId = btn.getAttribute('data-tab');
 
       tabBtns.forEach(b => b.classList.remove('active'));
-      tabPanes.forEach(p => {
-        p.style.display = 'none';
-        p.classList.remove('active');
+      tabPanes.forEach(pane => {
+        pane.classList.remove('active');
+        pane.style.display = 'none';
       });
 
       btn.classList.add('active');
       const targetPane = document.getElementById(targetId);
       if (targetPane) {
-        targetPane.style.display = 'block';
         targetPane.classList.add('active');
+        targetPane.style.display = 'block';
       }
     });
   });
 }
 
 /* ==========================================================================
-   Gallery Lightbox System
+   4. Live EMI Calculator (Exact Godrej Math & Sliders)
+   ========================================================================== */
+function initEmiCalculator() {
+  const loanInput = document.getElementById('calcLoanAmt');
+  const sliderAdv = document.getElementById('sliderAdvance');
+  const sliderDur = document.getElementById('sliderDuration');
+  const sliderRate = document.getElementById('sliderRate');
+
+  const advValSpan = document.getElementById('advPayVal');
+  const downPaySpan = document.getElementById('downPayAmt');
+  const durValSpan = document.getElementById('tenorYearsVal');
+  const rateValSpan = document.getElementById('ratePctVal');
+  const emiValSpan = document.getElementById('finalMonthlyEmi');
+
+  function formatIndianCurrency(num) {
+    if (isNaN(num)) return '0';
+    return Math.round(num).toLocaleString('en-IN');
+  }
+
+  function formatLacsOrCr(amount) {
+    if (amount >= 10000000) {
+      return `₹ ${(amount / 10000000).toFixed(2)} Cr`;
+    } else if (amount >= 100000) {
+      return `₹ ${(amount / 100000).toFixed(2)} Lacs`;
+    }
+    return `₹ ${formatIndianCurrency(amount)}`;
+  }
+
+  function calculateEmi() {
+    let basePrice = parseFloat(loanInput?.value) || 18900000;
+    if (basePrice < 100000) basePrice = 18900000;
+
+    const advPct = parseFloat(sliderAdv?.value) || 20;
+    const years = parseFloat(sliderDur?.value) || 20;
+    const rateAnnual = parseFloat(sliderRate?.value) || 8.5;
+
+    const downPayment = (basePrice * advPct) / 100;
+    const principal = basePrice - downPayment;
+    const months = years * 12;
+    const monthlyRate = (rateAnnual / 12) / 100;
+
+    let emi = 0;
+    if (monthlyRate > 0 && months > 0 && principal > 0) {
+      emi = (principal * monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
+    }
+
+    if (advValSpan) advValSpan.textContent = `${advPct}%`;
+    if (downPaySpan) downPaySpan.textContent = formatLacsOrCr(downPayment);
+    if (durValSpan) durValSpan.textContent = `${years} Years`;
+    if (rateValSpan) rateValSpan.textContent = `${rateAnnual.toFixed(1)}%`;
+    if (emiValSpan) emiValSpan.textContent = `₹ ${formatIndianCurrency(emi)} / month`;
+  }
+
+  sliderAdv?.addEventListener('input', calculateEmi);
+  sliderDur?.addEventListener('input', calculateEmi);
+  sliderRate?.addEventListener('input', calculateEmi);
+  loanInput?.addEventListener('input', calculateEmi);
+
+  // Initial calculation
+  calculateEmi();
+}
+
+/* ==========================================================================
+   5. Full Gallery Lightbox System (All 24 Official Images)
    ========================================================================== */
 function initGalleryLightbox() {
+  const galleryItems = [];
+  for (let i = 1; i <= 24; i++) {
+    galleryItems.push({
+      src: `assets/images/godrej-cdn/gallery/official-gal-${i}.webp`,
+      title: `Godrej Elanor Mahalunge - Official Gallery View ${i}`
+    });
+  }
+
   const lightbox = document.getElementById('lightboxModal');
   const lightboxImg = document.getElementById('lightboxImg');
   const lightboxCaption = document.getElementById('lightboxCaption');
   const closeBtn = document.getElementById('lightboxCloseBtn');
   const prevBtn = document.querySelector('.lightbox-prev');
   const nextBtn = document.querySelector('.lightbox-next');
+  const openGalleryBtn = document.getElementById('openFullGalleryBtn');
+  const previewCards = document.querySelectorAll('.gallery-preview-card');
 
-  let triggers = Array.from(document.querySelectorAll('[data-lightbox-src]'));
   let currentIndex = 0;
 
-  triggers.forEach((trigger, idx) => {
-    trigger.addEventListener('click', () => {
-      currentIndex = idx;
-      showItem(currentIndex);
-    });
-  });
+  function showImage(index) {
+    if (!galleryItems[index] || !lightboxImg) return;
+    currentIndex = index;
+    const item = galleryItems[currentIndex];
+    
+    lightboxImg.style.opacity = '0';
+    lightboxImg.src = item.src;
+    lightboxImg.onload = () => {
+      lightboxImg.style.transition = 'opacity 0.2s ease';
+      lightboxImg.style.opacity = '1';
+    };
+    
+    if (lightboxCaption) {
+      lightboxCaption.innerHTML = `<strong>${item.title}</strong> <span style="opacity: 0.7; margin-left: 0.5rem;">(${currentIndex + 1} / ${galleryItems.length})</span>`;
+    }
 
-  function showItem(index) {
-    if (!triggers[index] || !lightbox || !lightboxImg) return;
-    const item = triggers[index];
-    const src = item.getAttribute('data-lightbox-src') || item.querySelector('img')?.src;
-    const caption = item.getAttribute('data-title') || 'Godrej Elanor Mahalunge';
-
-    lightboxImg.src = src;
-    if (lightboxCaption) lightboxCaption.textContent = caption;
-    lightbox.classList.add('open');
+    lightbox?.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
 
@@ -125,22 +270,33 @@ function initGalleryLightbox() {
     document.body.style.overflow = '';
   }
 
-  function showNext() {
-    currentIndex = (currentIndex + 1) % triggers.length;
-    showItem(currentIndex);
+  function nextImage() {
+    currentIndex = (currentIndex + 1) % galleryItems.length;
+    showImage(currentIndex);
   }
 
-  function showPrev() {
-    currentIndex = (currentIndex - 1 + triggers.length) % triggers.length;
-    showItem(currentIndex);
+  function prevImage() {
+    currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+    showImage(currentIndex);
   }
+
+  openGalleryBtn?.addEventListener('click', () => {
+    showImage(0);
+  });
+
+  previewCards.forEach((card) => {
+    card.addEventListener('click', () => {
+      const idx = parseInt(card.getAttribute('data-lightbox-idx'), 10) || 0;
+      showImage(idx);
+    });
+  });
 
   closeBtn?.addEventListener('click', closeLightbox);
-  nextBtn?.addEventListener('click', (e) => { e.stopPropagation(); showNext(); });
-  prevBtn?.addEventListener('click', (e) => { e.stopPropagation(); showPrev(); });
+  nextBtn?.addEventListener('click', (e) => { e.stopPropagation(); nextImage(); });
+  prevBtn?.addEventListener('click', (e) => { e.stopPropagation(); prevImage(); });
 
   lightbox?.addEventListener('click', (e) => {
-    if (e.target === lightbox || e.target.classList.contains('lightbox-img-wrap')) {
+    if (e.target === lightbox || e.target.classList.contains('lightbox-body')) {
       closeLightbox();
     }
   });
@@ -148,99 +304,57 @@ function initGalleryLightbox() {
   document.addEventListener('keydown', (e) => {
     if (!lightbox?.classList.contains('open')) return;
     if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowRight') showNext();
-    if (e.key === 'ArrowLeft') showPrev();
+    if (e.key === 'ArrowRight') nextImage();
+    if (e.key === 'ArrowLeft') prevImage();
   });
 }
 
 /* ==========================================================================
-   Editorial FAQ Accordion
+   6. Footer Accordions
    ========================================================================== */
-function initFaqAccordion() {
-  const items = document.querySelectorAll('.faq-item-editorial');
+function initFooterAccordion() {
+  const triggers = document.querySelectorAll('.footer-acc-trigger');
 
-  items.forEach(item => {
-    const trigger = item.querySelector('.faq-trigger-editorial');
-    const answer = item.querySelector('.faq-answer-editorial');
+  triggers.forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      const item = trigger.closest('.footer-acc-item');
+      if (!item) return;
 
-    trigger?.addEventListener('click', () => {
-      const isOpen = item.classList.contains('active');
+      const isOpen = item.classList.contains('open');
 
-      // Close all
-      items.forEach(other => {
-        other.classList.remove('active');
-        const otherAns = other.querySelector('.faq-answer-editorial');
-        if (otherAns) otherAns.style.maxHeight = null;
+      document.querySelectorAll('.footer-acc-item.open').forEach(other => {
+        if (other !== item) {
+          other.classList.remove('open');
+        }
       });
 
-      if (!isOpen && answer) {
-        item.classList.add('active');
-        answer.style.maxHeight = answer.scrollHeight + 'px';
+      if (isOpen) {
+        item.classList.remove('open');
+      } else {
+        item.classList.add('open');
       }
     });
   });
-
-  // Open first by default
-  if (items[0]) {
-    items[0].classList.add('active');
-    const firstAns = items[0].querySelector('.faq-answer-editorial');
-    if (firstAns) firstAns.style.maxHeight = firstAns.scrollHeight + 'px';
-  }
 }
 
 /* ==========================================================================
-   Home Loan & EMI Estimator
-   ========================================================================== */
-function initEmiCalculator() {
-  const loanSlider = document.getElementById('calcLoan');
-  const loanVal = document.getElementById('calcLoanVal');
-  const tenorSlider = document.getElementById('calcTenor');
-  const tenorVal = document.getElementById('calcTenorVal');
-  const rateSlider = document.getElementById('calcRate');
-  const rateVal = document.getElementById('calcRateVal');
-
-  const emiDisplay = document.getElementById('calcMonthlyEmi');
-  const principalDisplay = document.getElementById('calcPrincipal');
-  const interestDisplay = document.getElementById('calcInterest');
-  const totalDisplay = document.getElementById('calcTotal');
-
-  function calculate() {
-    if (!loanSlider || !tenorSlider || !rateSlider) return;
-
-    const P = parseFloat(loanSlider.value) * 100000;
-    const N = parseFloat(tenorSlider.value) * 12;
-    const annualRate = parseFloat(rateSlider.value);
-    const R = (annualRate / 12) / 100;
-
-    const emi = (P * R * Math.pow(1 + R, N)) / (Math.pow(1 + R, N) - 1);
-    const totalPayable = emi * N;
-    const totalInterest = totalPayable - P;
-
-    if (loanVal) loanVal.textContent = `₹ ${parseFloat(loanSlider.value) >= 100 ? (parseFloat(loanSlider.value)/100).toFixed(2) + ' Cr' : loanSlider.value + ' Lacs'}`;
-    if (tenorVal) tenorVal.textContent = `${tenorSlider.value} Years`;
-    if (rateVal) rateVal.textContent = `${annualRate.toFixed(1)}% p.a.`;
-
-    if (emiDisplay) emiDisplay.textContent = `₹ ${Math.round(emi).toLocaleString('en-IN')}`;
-    if (principalDisplay) principalDisplay.textContent = `₹ ${Math.round(P).toLocaleString('en-IN')}`;
-    if (interestDisplay) interestDisplay.textContent = `₹ ${Math.round(totalInterest).toLocaleString('en-IN')}`;
-    if (totalDisplay) totalDisplay.textContent = `₹ ${Math.round(totalPayable).toLocaleString('en-IN')}`;
-  }
-
-  [loanSlider, tenorSlider, rateSlider].forEach(s => s?.addEventListener('input', calculate));
-  calculate();
-}
-
-/* ==========================================================================
-   Modals Management
+   7. Modals Management (Enquiry & Success)
    ========================================================================== */
 function initModals() {
-  window.openModal = function(modalId, configPrefill = '') {
+  window.openModal = function(modalId, prefill = '') {
     const modal = document.getElementById(modalId);
     if (!modal) return;
 
-    if (configPrefill) {
-      const select = modal.querySelector('select[name="configuration"]');
-      if (select) select.value = configPrefill;
+    if (prefill) {
+      const noteInput = modal.querySelector('input[name="enquiry_type"]') || modal.querySelector('select[name="configuration"]');
+      if (noteInput) {
+        if (noteInput.tagName === 'SELECT') {
+          if (prefill.includes('4 BHK')) noteInput.value = '4 BHK Duplex';
+          else if (prefill.includes('3 BHK')) noteInput.value = '3 BHK Premium';
+        } else {
+          noteInput.value = prefill;
+        }
+      }
     }
 
     modal.classList.add('open');
@@ -291,10 +405,12 @@ function initModals() {
 }
 
 /* ==========================================================================
-   Form Handling & Lead Confirmation
+   8. Form Submission & Direct WhatsApp Lead Routing
    ========================================================================== */
-function initForms() {
+function initLeadForms() {
   const forms = document.querySelectorAll('form[data-lead-form]');
+  const TARGET_PHONE = '8459396466';
+  const TARGET_EMAIL = 'enquiryinfinitee@gmail.com';
 
   forms.forEach(form => {
     form.addEventListener('submit', (e) => {
@@ -302,79 +418,77 @@ function initForms() {
 
       const nameInput = form.querySelector('input[name="name"]');
       const phoneInput = form.querySelector('input[name="phone"]');
-      const configInput = form.querySelector('select[name="configuration"]');
-      const dateInput = form.querySelector('input[name="visit_date"]');
+      const emailInput = form.querySelector('input[name="email"]');
+      const configInput = form.querySelector('select[name="configuration"]') || form.querySelector('input[name="configuration"]');
 
       const name = nameInput ? nameInput.value.trim() : '';
       const phone = phoneInput ? phoneInput.value.trim() : '';
+      const email = emailInput ? emailInput.value.trim() : '';
       const config = configInput ? configInput.value : '3 BHK Premium';
-      const visitDate = dateInput ? dateInput.value : '';
 
-      const cleanPhone = phone.replace(/[^0-9]/g, '');
-      if (cleanPhone.length < 10) {
-        showToast('Please enter a valid 10-digit mobile number.', 'error');
-        phoneInput?.focus();
-        return;
-      }
-
-      if (!name) {
-        showToast('Please enter your full name.', 'error');
+      if (!name || name.length < 2) {
+        alert('Please enter your full name.');
         nameInput?.focus();
         return;
       }
 
+      const cleanPhone = phone.replace(/[^0-9]/g, '');
+      if (cleanPhone.length < 10) {
+        alert('Please enter a valid 10-digit mobile number.');
+        phoneInput?.focus();
+        return;
+      }
+
       const submitBtn = form.querySelector('button[type="submit"]');
-      const originalText = submitBtn ? submitBtn.innerHTML : '';
+      const origText = submitBtn ? submitBtn.innerHTML : '';
       if (submitBtn) {
-        submitBtn.innerHTML = 'Securing Priority...';
+        submitBtn.innerHTML = 'Submitting Request...';
         submitBtn.disabled = true;
       }
 
-      const leadData = {
+      const leadPayload = {
         name,
         phone: cleanPhone,
+        email,
         configuration: config,
-        visitDate,
-        targetEmail: 'enquiryinfinitee@gmail.com',
-        targetPhone: '+918459396466',
         timestamp: new Date().toISOString(),
-        project: 'Godrej Elanor Mahalunge, Pune'
+        project: 'Godrej Elanor Mahalunge, Pune',
+        targetEmail: TARGET_EMAIL,
+        targetPhone: TARGET_PHONE
       };
 
       try {
         const stored = JSON.parse(localStorage.getItem('godrej_elanor_leads') || '[]');
-        stored.push(leadData);
+        stored.push(leadPayload);
         localStorage.setItem('godrej_elanor_leads', JSON.stringify(stored));
       } catch (err) {
-        console.warn('LocalStorage unavailable', err);
+        console.warn('LocalStorage error', err);
       }
 
-      // Dispatch lead payload
       try {
         fetch('https://api.web3forms.com/submit', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
           body: JSON.stringify({
             access_key: 'enquiryinfinitee',
-            to: 'enquiryinfinitee@gmail.com',
-            subject: `New Lead: Godrej Elanor Mahalunge - ${name}`,
+            to: TARGET_EMAIL,
             from_name: 'Godrej Elanor Portal',
+            subject: `New Lead: Godrej Elanor - ${name} (${cleanPhone})`,
             name: name,
             phone: cleanPhone,
+            email: email || 'Not provided',
             configuration: config,
-            visit_date: visitDate,
-            project: 'Godrej Elanor Mahalunge'
+            project: 'Godrej Elanor Mahalunge, Pune'
           })
-        }).catch(() => {
-          // Silent catch for demo environments
-        });
-      } catch (e) {
-        // Fallback
-      }
+        }).catch(() => {});
+      } catch (err) {}
+
+      const waMsg = `Hi Godrej Sales Team, I am interested in Godrej Elanor Mahalunge.%0A*Name:* ${encodeURIComponent(name)}%0A*Phone:* ${cleanPhone}%0A*Email:* ${encodeURIComponent(email || 'N/A')}%0A*Configuration:* ${encodeURIComponent(config)}%0APlease share the official price sheet, brochure and floor plans.`;
+      const waUrl = `https://wa.me/91${TARGET_PHONE}?text=${waMsg}`;
 
       setTimeout(() => {
         if (submitBtn) {
-          submitBtn.innerHTML = originalText;
+          submitBtn.innerHTML = origText;
           submitBtn.disabled = false;
         }
 
@@ -384,148 +498,26 @@ function initForms() {
         document.body.style.overflow = '';
 
         const successModal = document.getElementById('successModal');
+        const nameEl = document.getElementById('successLeadName');
+        const phoneEl = document.getElementById('successLeadPhone');
+        const refEl = document.getElementById('successRefId');
+
+        if (nameEl) nameEl.textContent = name;
+        if (phoneEl) phoneEl.textContent = `+91 ${cleanPhone}`;
+        if (refEl) refEl.textContent = 'GE-' + Math.floor(10000 + Math.random() * 90000);
+
+        const successWaBtn = successModal?.querySelector('.btn-success-whatsapp') || successModal?.querySelector('a[href*="wa.me"]');
+        if (successWaBtn) {
+          successWaBtn.setAttribute('href', waUrl);
+        }
+
         if (successModal) {
-          document.getElementById('successLeadName').textContent = name;
-          document.getElementById('successLeadPhone').textContent = `+91 ${cleanPhone}`;
-          document.getElementById('successRefId').textContent = 'GE-' + Math.floor(10000 + Math.random() * 90000);
           successModal.classList.add('open');
           document.body.style.overflow = 'hidden';
         } else {
-          showToast(`Thank you, ${name}! Your request has been acknowledged.`);
+          window.open(waUrl, '_blank');
         }
-      }, 600);
+      }, 500);
     });
   });
 }
-
-/* ==========================================================================
-   Toast Notification System
-   ========================================================================== */
-function showToast(message, type = 'success') {
-  let container = document.querySelector('.toast-container');
-  if (!container) {
-    container = document.createElement('div');
-    container.className = 'toast-container';
-    document.body.appendChild(container);
-  }
-
-  const toast = document.createElement('div');
-  toast.className = 'toast';
-  if (type === 'error') toast.style.borderColor = '#E57373';
-
-  toast.innerHTML = `
-    <span style="font-weight: 700; color: ${type === 'error' ? '#E57373' : 'var(--accent-terracotta)'}">•</span>
-    <span>${message}</span>
-  `;
-
-  container.appendChild(toast);
-
-  setTimeout(() => {
-    toast.style.opacity = '0';
-    toast.style.transition = 'opacity 0.3s ease';
-    setTimeout(() => toast.remove(), 300);
-  }, 4000);
-}
-
-/* ==========================================================================
-   Smooth Scrolling
-   ========================================================================== */
-function initSmoothScroll() {
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      const targetId = this.getAttribute('href');
-      if (targetId === '#' || targetId === '') return;
-
-      const target = document.querySelector(targetId);
-      if (target) {
-        e.preventDefault();
-        const headerHeight = document.querySelector('.site-header')?.offsetHeight || 75;
-        const top = target.getBoundingClientRect().top + window.scrollY - headerHeight + 5;
-        window.scrollTo({
-          top: top,
-          behavior: 'smooth'
-        });
-      }
-    });
-  });
-}
-
-/* ==========================================================================
-   Brochure Download Helper
-   ========================================================================== */
-window.downloadBrochureFile = function() {
-  showToast('Downloading Godrej Elanor Project Factsheet...');
-  
-  setTimeout(() => {
-    const factsheetContent = `
-================================================================================
-                    GODREJ ELANOR MAHALUNGE, PUNE
-                    French Riverside Living by Godrej Properties
-================================================================================
-
-PROJECT OVERVIEW:
-• Developer: Godrej Properties Ltd. (127+ Years of Trust)
-• Location: Mahalunge, Baner-Hinjawadi IT Corridor, Pune - 411045
-• MahaRERA Registration: PR1260002602617
-• Channel Partner RERA: A52100040088
-• Land Parcel: 8.5 Acres (French-inspired architecture)
-• Open Green Spaces: Approx. 5 Acres
-• Structure: Basement + Ground + 3 Podiums + 35 Residential Floors
-• Towers: 5 Residential Towers (Phase 1 launch: 2 Towers)
-• Density: Low-density design with 8 residences per floor & 7 high-speed lifts
-
-CONFIGURATIONS & PRICING:
-1. 3 BHK Premium:
-   - Carpet Area: 1,270 – 1,280 Sq. Ft.
-   - Price: ₹ 1.90 – 2.03 Cr* (All Inclusive)
-   - Features: Expansive running decks, cross-ventilation, French river views.
-
-2. 3 BHK Luxe:
-   - Carpet Area: 1,310 Sq. Ft.
-   - Price: ₹ 1.96 – 2.09 Cr* (All Inclusive)
-   - Features: Ultra-spacious master suite with private deck, panoramic river vistas.
-
-3. 4 BHK Duplex Residences:
-   - Carpet Area: On Request (Floors 32 to 35)
-   - Price: ₹ On Request*
-   - Features: Crowning top 4 floors, double-height living, grand riverside decks.
-
-KEY HIGHLIGHTS & RIVERFRONT AMENITIES:
-• Nearly 1,00,000 Sq. Ft. of Curated Riverfront Amenities
-• Twin Designer Clubhouses: 18,000 Sq. Ft. and 12,000 Sq. Ft. (30,000 Sq. Ft. total)
-• Grand Infinity-Edge Swimming Pool & Sun Deck
-• Riverfront Promenade & Nature Boardwalk
-• Professional Badminton & Squash Courts
-• High-Tech Fitness Studio & Crossfit Zone
-• 36-metre Main & 15-metre Internal Arterial Roads
-• Expression of Interest (EOI) starting at ₹ 1 Lakh*
-
-LOCATION & TRANSIT ADVANTAGES:
-• Hinjewadi IT Park: 9 Mins
-• Mumbai-Pune Expressway / NH 48: 12 Mins
-• Balewadi Metro Station: 14 Mins
-• Baner / Wakad: 16 Mins
-• Symbiosis University: 14 Mins
-• Ruby Hall Clinic: 11 Mins
-• Pune Airport: 35 Mins
-
-SALES & SITE VISIT DESK:
-• Phone / WhatsApp: +91 84593 96466
-• Email: enquiryinfinitee@gmail.com
-• Address: Godrej Elanor, Riverfront Road, Mahalunge, Pune - 411045
-================================================================================
-    `;
-
-    const blob = new Blob([factsheetContent], { type: 'text/plain;charset=utf-8' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'Godrej-Elanor-Mahalunge-Factsheet.txt';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-
-    showToast('Factsheet downloaded successfully!');
-  }, 800);
-};

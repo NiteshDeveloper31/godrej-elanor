@@ -368,8 +368,27 @@ function initModals() {
     document.body.style.overflow = '';
   };
 
+  // Auto popup enquiry form 3.5 seconds after page load
+  let hasAutoOpened = false;
+  setTimeout(() => {
+    if (hasAutoOpened) return;
+    const enquiryModal = document.getElementById('enquiryModal');
+    const lightboxModal = document.getElementById('lightboxModal');
+    const successModal = document.getElementById('successModal');
+
+    const isAnyModalOpen = (enquiryModal && enquiryModal.classList.contains('open')) ||
+                           (lightboxModal && lightboxModal.classList.contains('open')) ||
+                           (successModal && successModal.classList.contains('open'));
+
+    if (!isAnyModalOpen) {
+      hasAutoOpened = true;
+      window.openModal('enquiryModal', 'Priority Project Details & Price Sheet');
+    }
+  }, 3500);
+
   document.querySelectorAll('[data-open-modal]').forEach(btn => {
     btn.addEventListener('click', (e) => {
+      hasAutoOpened = true;
       e.preventDefault();
       const modalId = btn.getAttribute('data-open-modal');
       const prefill = btn.getAttribute('data-prefill') || '';

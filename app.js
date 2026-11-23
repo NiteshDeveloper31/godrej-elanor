@@ -18,8 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
    1. Sub-Navigation Sticky & Smooth Scroll & Active Indicator
    ========================================================================== */
 function initSubNavScroll() {
-  const subNav = document.getElementById('subNav');
-  const navLinks = document.querySelectorAll('.subnav-links-list a[href^="#"], .drawer-link[href^="#"], .breadcrumb-trail a[href^="#"]');
+  const navLinks = document.querySelectorAll('.header-nav-list a[href^="#"], .subnav-links-list a[href^="#"], .drawer-link[href^="#"], .breadcrumb-trail a[href^="#"]');
   const sections = Array.from(document.querySelectorAll('section[id]'));
   const topLinks = document.querySelectorAll('.header-brand-link, .header-script-link, a[href="#hero"]');
 
@@ -82,7 +81,7 @@ function initSubNavScroll() {
       const id = sec.getAttribute('id');
       
       if (scrollPos >= top && scrollPos < top + height) {
-        document.querySelectorAll('.subnav-links-list a').forEach(a => {
+        document.querySelectorAll('.header-nav-list a, .subnav-links-list a').forEach(a => {
           if (a.getAttribute('href') === `#${id}`) {
             a.classList.add('active');
           } else {

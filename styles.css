@@ -100,14 +100,11 @@ button, input, select {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
   width: 100%;
-  height: 64px;
+  height: 76px;
   background-color: #FFFFFF;
-  border-bottom: 1px solid #E7E7E7;
   z-index: 1000;
-  display: flex;
-  align-items: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
 }
 
 .header-inner-container {
@@ -115,6 +112,7 @@ button, input, select {
   max-width: 1320px;
   margin: 0 auto;
   padding: 0 1.5rem;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -128,9 +126,9 @@ button, input, select {
 }
 
 .header-logo-gpl {
-  height: 48px;
+  height: 60px;
   width: auto;
-  max-width: 190px;
+  max-width: 220px;
   display: block;
   object-fit: contain;
 }
@@ -177,15 +175,29 @@ button, input, select {
 
 @media (max-width: 768px) {
   .godrej-site-header {
-    height: 56px;
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 76px;
+  background-color: #FFFFFF;
+  z-index: 1000;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
   .header-inner-container {
-    padding: 0 0.85rem;
-  }
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
   .header-logo-gpl {
-  height: 48px;
+  height: 60px;
   width: auto;
-  max-width: 190px;
+  max-width: 220px;
   display: block;
   object-fit: contain;
 }
@@ -210,25 +222,28 @@ button, input, select {
 /* Sub-Navigation Bar: Fixed directly under the white header */
 .hero-subnav-bar {
   position: fixed;
-  top: 64px;
+  top: 76px;
   left: 0;
-  right: 0;
   width: 100%;
   height: 48px;
-  z-index: 990;
-  background-color: var(--gpl-navy-dark);
+  background-color: var(--gpl-navy);
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  z-index: 999;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
 }
 
 @media (max-width: 768px) {
   .hero-subnav-bar {
-    top: 56px;
-    height: 44px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-  }
+  position: fixed;
+  top: 76px;
+  left: 0;
+  width: 100%;
+  height: 48px;
+  background-color: var(--gpl-navy);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  z-index: 999;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
 }
 
 .subnav-inner-container {
@@ -307,20 +322,25 @@ button, input, select {
 .godrej-hero-section {
   position: relative;
   width: 100%;
-  margin-top: 112px; /* 64px header + 48px subnav */
-  height: calc(85vh - 112px);
-  min-height: 540px;
-  max-height: 780px;
-  background-color: var(--gpl-navy-dark);
+  height: calc(100vh - 76px);
+  min-height: 580px;
+  max-height: 860px;
+  margin-top: 76px;
   overflow: hidden;
+  background-color: #071A30;
 }
 
 @media (max-width: 768px) {
   .godrej-hero-section {
-    margin-top: 100px; /* 56px + 44px */
-    height: calc(75vh - 100px);
-    min-height: 440px;
-  }
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 76px);
+  min-height: 580px;
+  max-height: 860px;
+  margin-top: 76px;
+  overflow: hidden;
+  background-color: #071A30;
+}
 }
 
 .hero-picture-bg,
@@ -1911,7 +1931,215 @@ button, input, select {
     grid-template-columns: 1fr;
   }
   .header-logo-gpl {
-    height: 40px;
-    max-width: 145px;
+  height: 60px;
+  width: auto;
+  max-width: 220px;
+  display: block;
+  object-fit: contain;
+}
+}
+
+
+/* ==========================================================================
+   HERO FLOATING CARD ENHANCED TYPOGRAPHY & BULLETS
+   ========================================================================== */
+.hero-card-tagline {
+  font-size: 1.05rem;
+  color: #E2E8F0;
+  font-weight: 500;
+  margin-top: 0.35rem;
+}
+
+.hero-card-price {
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: #FBBF24;
+  margin: 0.25rem 0 0.75rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-feature-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.hero-feature-bullets li {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.92rem;
+  color: #F8FAFC;
+  font-weight: 500;
+}
+
+.bullet-diamond {
+  color: #FBBF24;
+  font-size: 0.75rem;
+  flex-shrink: 0;
+}
+
+.hero-meta-grid {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 6px;
+  padding: 0.55rem 0.95rem;
+  margin: 0.65rem 0 0.85rem;
+  backdrop-filter: blur(6px);
+  width: fit-content;
+}
+
+.hero-meta-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.hero-meta-col .meta-label {
+  font-size: 0.72rem;
+  color: #94A3B8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+.hero-meta-col .meta-value {
+  font-size: 0.95rem;
+  color: #FFFFFF;
+  font-weight: 700;
+}
+
+.hero-meta-divider {
+  color: rgba(255, 255, 255, 0.25);
+  font-weight: 300;
+}
+
+@media (max-width: 768px) {
+  .godrej-site-header {
+    height: 64px;
+  }
+  .header-logo-gpl {
+    height: 48px;
+    max-width: 160px;
+  }
+  .hero-subnav-bar {
+    top: 64px;
+  }
+  .godrej-hero-section {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 76px);
+  min-height: 580px;
+  max-height: 860px;
+  margin-top: 76px;
+  overflow: hidden;
+  background-color: #071A30;
+}
+  .hero-card-price {
+    font-size: 1.4rem;
+  }
+  .hero-meta-grid {
+    width: 100%;
+    justify-content: space-around;
+  }
+}
+
+
+/* ==========================================================================
+   MAIN HEADER NAVIGATION LINKS (BLACK TEXT)
+   ========================================================================== */
+.header-main-nav {
+  display: flex;
+  align-items: center;
+  margin: 0 1.5rem;
+}
+
+.header-nav-list {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.header-nav-list a {
+  color: #111827 !important; /* Bold black text as requested */
+  text-decoration: none;
+  font-size: 14.5px;
+  font-weight: 600;
+  padding: 8px 0;
+  position: relative;
+  letter-spacing: 0.01em;
+  transition: color 0.2s ease;
+  white-space: nowrap;
+}
+
+.header-nav-list a:hover {
+  color: #B89B5E !important;
+}
+
+.header-nav-list a.active {
+  color: #B89B5E !important;
+}
+
+.header-nav-list a.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2.5px;
+  background-color: #B89B5E;
+  border-radius: 2px;
+}
+
+.btn-hdr-enquire {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #B89B5E;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 4px;
+  padding: 0.55rem 1.15rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.btn-hdr-enquire:hover {
+  background-color: #A38446;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 1080px) {
+  .header-nav-list {
+    gap: 1rem;
+  }
+  .header-nav-list a {
+    font-size: 13.5px;
+  }
+}
+
+@media (max-width: 992px) {
+  .header-main-nav {
+    display: none;
+  }
+  .btn-hdr-enquire {
+    display: none;
+  }
+  .godrej-hero-section {
+    margin-top: 64px;
+    height: auto;
+    min-height: 520px;
   }
 }

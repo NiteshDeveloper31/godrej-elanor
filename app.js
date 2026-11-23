@@ -430,6 +430,7 @@ function initLeadForms() {
   const forms = document.querySelectorAll('form[data-lead-form]');
   const TARGET_PHONE = '8459396466';
   const TARGET_EMAIL = 'enquiryinfinitee@gmail.com';
+  const SECONDARY_EMAIL = 'abhijitsarvade39@gmail.com';
 
   forms.forEach(form => {
     form.addEventListener('submit', (e) => {
@@ -472,7 +473,7 @@ function initLeadForms() {
         configuration: config,
         timestamp: new Date().toISOString(),
         project: 'Godrej Elanor Mahalunge, Pune',
-        targetEmail: TARGET_EMAIL,
+        targetEmails: [TARGET_EMAIL, SECONDARY_EMAIL],
         targetPhone: TARGET_PHONE
       };
 
@@ -484,22 +485,27 @@ function initLeadForms() {
         console.warn('LocalStorage error', err);
       }
 
+      // Send Instant Lead Notification Email to Both Emails (Client & Abhijit)
       try {
-        fetch('https://api.web3forms.com/submit', {
+        fetch(`https://formsubmit.co/ajax/${TARGET_EMAIL}`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          headers: { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json' 
+          },
           body: JSON.stringify({
-            access_key: 'enquiryinfinitee',
-            to: TARGET_EMAIL,
-            from_name: 'Godrej Elanor Portal',
-            subject: `New Lead: Godrej Elanor - ${name} (${cleanPhone})`,
-            name: name,
-            phone: cleanPhone,
-            email: email || 'Not provided',
-            configuration: config,
-            project: 'Godrej Elanor Mahalunge, Pune'
+            _subject: `New Lead: Godrej Elanor Mahalunge - ${name} (${cleanPhone})`,
+            _cc: SECONDARY_EMAIL,
+            _template: 'table',
+            _captcha: 'false',
+            'Project': 'Godrej Elanor Mahalunge Township, Pune',
+            'Customer Name': name,
+            'Mobile Number': cleanPhone,
+            'Email Address': email || 'Not provided',
+            'Preferred Configuration': config,
+            'Submission Time': new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
           })
-        }).catch(() => {});
+        }).catch(err => console.log('Lead email notification status:', err));
       } catch (err) {}
 
       const waMsg = `Hi Godrej Sales Team, I am interested in Godrej Elanor Mahalunge.%0A*Name:* ${encodeURIComponent(name)}%0A*Phone:* ${cleanPhone}%0A*Email:* ${encodeURIComponent(email || 'N/A')}%0A*Configuration:* ${encodeURIComponent(config)}%0APlease share the official price sheet, brochure and floor plans.`;
